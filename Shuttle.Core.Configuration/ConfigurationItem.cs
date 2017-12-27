@@ -1,0 +1,104 @@
+using System;
+using System.Configuration;
+using Shuttle.Core.Logging;
+
+namespace Shuttle.Core.Configuration
+{
+    public class ConfigurationItem<T>
+    {
+        private readonly T _item;
+
+        public ConfigurationItem(T item)
+        {
+            _item = item;
+        }
+
+        public T GetValue()
+        {
+            return _item;
+        }
+
+        public static ConfigurationItem<T> ReadSetting(string key)
+        {
+            return ReadSetting(key, true, default(T));
+        }
+
+        public static ConfigurationItem<T> ReadSetting(string key, T @default)
+        {
+            return ReadSetting(key, false, @default);
+        }
+
+        private static ConfigurationItem<T> ReadSetting(string key, bool required, T @default)
+        {
+            var setting = ConfigurationManager.AppSettings[key];
+
+            if (string.IsNullOrEmpty(setting))
+            {
+                if (required)
+                {
+                    var message = string.Format(Resources.ConfigurationItemMissing, key);
+
+                    Log.Error(message);
+
+                    throw new ApplicationException(message);
+                }
+
+                Log.Information(string.Format("[ConfigurationItem] {0} : {1} ({2})", key, @default,
+                    Resources.ConfigurationItemMissingUsingDefault));
+
+                return new ConfigurationItem<T>(@default);
+            }
+
+            if (string.IsNullOrEmpty(setting))
+            {
+                Log.Information(string.Format("[ConfigurationItem] {0} : {1} ({2})", key, @default,
+                    Resources.ConfigurationItemMissingUsingDefault));
+
+                return new ConfigurationItem<T>(@default);
+            }
+
+            var item =
+                new ConfigurationItem<T>(
+                    (T) Convert.ChangeType(setting, Nullable.GetUnderlyingType(typeof(T)) ?? typeof(T)));
+
+            Log.Information($"[ConfigurationItem] {key} : {ProtectedValue(key, Convert.ToString(item.GetValue()))}");
+
+            return item;
+        }
+
+        private static object ProtectedValue(string key, string value)
+        {
+            var keysValue = ConfigurationManager.AppSettings["ConfigurationItemSensitiveKeys"];
+            var useContains = false;
+
+            if (string.IsNullOrEmpty(keysValue))
+            {
+                useContains = true;
+
+                keysValue = "password;pwd";
+            }
+
+            var keys = keysValue.Split(new[] {";", ","}, StringSplitOptions.RemoveEmptyEntries);
+
+            foreach (var sensitiveKey in keys)
+            {
+                if (useContains)
+                {
+                    if (key.ToLower().Contains(sensitiveKey))
+                    {
+                        return "(sensitive data)";
+                    }
+                }
+                else
+                {
+                    if (key.Equals(sensitiveKey, StringComparison.InvariantCultureIgnoreCase))
+                    {
+                        return "(sensitive data)";
+                    }
+                }
+            }
+
+            return value;
+        }
+    }
+}

@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Shuttle.Core.Configuration</id>
+    <version>{semver}</version>
+    <authors>Eben Roux</authors>
+    <owners>Eben Roux</owners>
+    <licenseUrl>https://github.com/shuttle/Shuttle.Core.Configuration/raw/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/shuttle/Shuttle.Core.Configuration</projectUrl>
+    <iconUrl>https://raw.githubusercontent.com/Shuttle/Shuttle.Core.Configuration/master/.media/logo.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Configuration infrastructure components.</description>
+    <releaseNotes/>
+    <copyright>Copyright (c) {year}, Eben Roux</copyright>
+    <tags>shuttle configuration</tags>
+    <dependencies>
+      <group>
+        <dependency id="Shuttle.Core.Logging" version="{Shuttle.Core.Logging-version}" />
+      </group>
+
+      <group targetFramework="netstandard2.0">
+        <dependency id="System.Configuration.ConfigurationManager" version="{System.Configuration.ConfigurationManager-version}" />
+      </group>
+
+      <group targetFramework="netcoreapp2.0">
+        <dependency id="System.Configuration.ConfigurationManager" version="{System.Configuration.ConfigurationManager-version}" />
+      </group>
+    </dependencies>
+  </metadata>
+</package>
