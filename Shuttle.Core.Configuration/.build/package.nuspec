@@ -19,10 +19,12 @@
       </group>
 
       <group targetFramework="netstandard2.0">
+        <dependency id="Shuttle.Core.Logging" version="10.0.1" />
         <dependency id="System.Configuration.ConfigurationManager" version="{System.Configuration.ConfigurationManager-version}" />
       </group>
 
       <group targetFramework="netcoreapp2.0">
+        <dependency id="Shuttle.Core.Logging" version="10.0.1" />
         <dependency id="System.Configuration.ConfigurationManager" version="{System.Configuration.ConfigurationManager-version}" />
       </group>
     </dependencies>
