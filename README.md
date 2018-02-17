@@ -1,5 +1,11 @@
 # Shuttle.Core.Configuration
 
+```
+PM> Install-Package Shuttle.Core.Configuration
+```
+
+This package provides access to the existing .Net configuration system provided by `ConfigurationSection` classes.
+
 ## ConfigurationSectionProvider
 
 ``` c#
