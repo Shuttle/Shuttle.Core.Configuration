@@ -8,6 +8,7 @@
     <licenseUrl>https://github.com/shuttle/Shuttle.Core.Configuration/raw/master/LICENSE</licenseUrl>
     <projectUrl>https://github.com/shuttle/Shuttle.Core.Configuration</projectUrl>
     <iconUrl>https://raw.githubusercontent.com/Shuttle/Shuttle.Core.Configuration/master/.media/logo.png</iconUrl>
+    <repository type="git" url="https://github.com/Shuttle/Shuttle.Core.Configuration.git" />
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Configuration infrastructure components.</description>
     <releaseNotes/>
@@ -24,6 +25,11 @@
       </group>
 
       <group targetFramework="netcoreapp2.0">
+        <dependency id="Shuttle.Core.Logging" version="10.0.1" />
+        <dependency id="System.Configuration.ConfigurationManager" version="{System.Configuration.ConfigurationManager-version}" />
+      </group>
+
+      <group targetFramework="netcoreapp2.1">
         <dependency id="Shuttle.Core.Logging" version="10.0.1" />
         <dependency id="System.Configuration.ConfigurationManager" version="{System.Configuration.ConfigurationManager-version}" />
       </group>
