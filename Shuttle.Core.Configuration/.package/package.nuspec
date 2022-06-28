@@ -3,7 +3,7 @@
 <package>
 	<metadata>
 		<id>Shuttle.Core.Configuration</id>
-		<version>10.0.4</version>
+		<version>10.1.0</version>
 		<authors>Eben Roux</authors>
 		<owners>Eben Roux</owners>
 		<license type="expression">BSD-3-Clause</license>
@@ -12,10 +12,9 @@
 		<repository type="git" url="https://github.com/shuttle/Shuttle.Core.Configuration.git" />
 		<projectUrl>https://github.com/shuttle/Shuttle.Core.Configuration</projectUrl>
 		<description>Configuration infrastructure components.</description>
-		<copyright>Copyright (c) 2020, Eben Roux</copyright>
+		<copyright>Copyright (c) 2022, Eben Roux</copyright>
 		<tags>shuttle configuration</tags>
 		<dependencies>
-      <dependency id="Shuttle.Core.Logging" version="10.0.4" />
       <dependency id="System.Configuration.ConfigurationManager" version="5.0.0" />
 		</dependencies>
 	</metadata>

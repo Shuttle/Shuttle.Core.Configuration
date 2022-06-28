@@ -1,6 +1,5 @@
 using System;
 using System.Configuration;
-using Shuttle.Core.Logging;
 
 namespace Shuttle.Core.Configuration
 {
@@ -36,34 +35,19 @@ namespace Shuttle.Core.Configuration
             {
                 if (required)
                 {
-                    var message = string.Format(Resources.ConfigurationItemMissing, key);
-
-                    Log.Error(message);
-
-                    throw new ApplicationException(message);
+                    throw new ApplicationException(string.Format(Resources.ConfigurationItemMissing, key));
                 }
-
-                Log.Information(string.Format("[ConfigurationItem] {0} : {1} ({2})", key, @default,
-                    Resources.ConfigurationItemMissingUsingDefault));
 
                 return new ConfigurationItem<T>(@default);
             }
 
             if (string.IsNullOrEmpty(setting))
             {
-                Log.Information(string.Format("[ConfigurationItem] {0} : {1} ({2})", key, @default,
-                    Resources.ConfigurationItemMissingUsingDefault));
-
                 return new ConfigurationItem<T>(@default);
             }
 
-            var item =
-                new ConfigurationItem<T>(
-                    (T) Convert.ChangeType(setting, Nullable.GetUnderlyingType(typeof(T)) ?? typeof(T)));
-
-            Log.Information($"[ConfigurationItem] {key} : {ProtectedValue(key, Convert.ToString(item.GetValue()))}");
-
-            return item;
+            return new ConfigurationItem<T>(
+                (T)Convert.ChangeType(setting, Nullable.GetUnderlyingType(typeof(T)) ?? typeof(T)));
         }
 
         private static object ProtectedValue(string key, string value)
