@@ -1,5 +1,8 @@
 # Shuttle.Core.Configuration
 
+> **Warning**
+> This package has been deprecated in favour of the [options pattern](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/configuration/options).
+
 ```
 PM> Install-Package Shuttle.Core.Configuration
 ```
